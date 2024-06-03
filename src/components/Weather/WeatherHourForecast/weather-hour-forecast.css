@@ -1,0 +1,24 @@
+.weather-hour-forecast-wrapper {
+
+    /* padding: 1rem 16rem 0 .56rem; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin: 15px;
+    width: 100%;
+
+    & .weather-forecast-icon {
+        color: var(--color3);
+        font-size: 2.5rem;
+        margin: .25rem 0;
+    }
+
+    & .weather-forecast-hour {
+        color: var(--color4);
+    }
+
+    & .weather-forecast-degree {
+        color: var(--color4);
+    }
+}
