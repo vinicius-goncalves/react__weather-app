@@ -1,5 +1,5 @@
 import WeatherCardSkeleton from './WeatherCardSkeleton';
-import WeatherHourForecastSkeleton from './WeatherHourForecastSkeleton';
+import WeatherHourlyForecastSkeleton from '../../Weather/WeatherParticles/WeatherInfos/WeatherHourlyForecastSkeleton';
 import WeatherInfoSkeleton from './WeatherInfoSkeleton';
 
 function WeatherPageSkeleton(): JSX.Element {
@@ -22,7 +22,7 @@ function WeatherPageSkeleton(): JSX.Element {
             </div>
             <aside className="grid grid-cols-6 gap-2.5 max-md:grid-cols-3">
                 {new Array(6).fill(undefined).map((_, index) => (
-                    <WeatherHourForecastSkeleton key={index} />
+                    <WeatherHourlyForecastSkeleton key={index} />
                 ))}
             </aside>
         </div>

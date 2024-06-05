@@ -1,51 +1,49 @@
 import { useEffect, useRef } from 'react';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
+import useGeolocation from '../../hooks/useGeolocation';
 import useInputQuery from '../../hooks/useInputQuery';
 import { useGetCityWeatherQuery } from '../../store/apis/weatherApi';
-import GoogleIcon from '../GoogleIcon';
-import SearchOptions from '../SearchOptions/SearchOptions';
 import { weatherActions } from '../../store/slices/weatherSlice';
-import useGeolocation from '../../hooks/useGeolocation';
+import GoogleIcon from '../GoogleIcon';
+import SearchOptions from './SearchOptions';
 
 function Search(): JSX.Element {
     const { query, updateQuery } = useInputQuery(1100);
+
     const dispatch = useAppDispatch();
-    const { error, latitude, longitude } = useGeolocation();
+    const geolocation = useGeolocation();
     const inputQuery = useRef<HTMLInputElement | null>(null);
 
-    const {
-        data: weather,
-        isLoading,
-        isFetching,
-        isUninitialized,
-    } = useGetCityWeatherQuery(
-        { cityName: query },
-        { skip: !query, refetchOnFocus: true }
+    const { data: weather, ...weatherApi } = useGetCityWeatherQuery(
+        { q: query },
+        { skip: !query, refetchOnFocus: true, refetchOnReconnect: true }
     );
 
     useEffect(() => {
-        if (isUninitialized && !error) {
-            updateQuery(`${latitude},${longitude}`);
+        if (!geolocation.isFetching && !geolocation.error) {
+            updateQuery(`${geolocation.latitude},${geolocation.longitude}`);
         }
-    }, [isUninitialized, error, latitude, longitude, updateQuery]);
+    }, [geolocation, updateQuery]);
 
     useEffect(() => {
         dispatch(weatherActions.setWeather(weather));
-    }, [weather, dispatch]);
-
-    useEffect(() => {
         dispatch(
             weatherActions.setStatus({
-                isLoading,
-                isFetching,
-                isUninitialized,
+                isLoading: weatherApi.isLoading,
+                isFetching: weatherApi.isFetching,
+                isUninitialized: weatherApi.isUninitialized,
             })
         );
-    }, [isLoading, isFetching, isUninitialized, dispatch]);
+    }, [weather, weatherApi, dispatch]);
 
-    function updateSearchOptions() {
-        if (!error && inputQuery.current) {
+    function setGeolocation() {
+        if (!geolocation.error && inputQuery.current) {
+            const [latitude, longitude] = [
+                geolocation.latitude,
+                geolocation.longitude,
+            ];
             inputQuery.current.value = `${latitude}, ${longitude}`;
+            updateQuery(`${latitude}, ${longitude}`);
         }
     }
 
@@ -61,7 +59,7 @@ function Search(): JSX.Element {
                     ref={inputQuery}
                 />
             </div>
-            <SearchOptions icon="my_location" onClick={updateSearchOptions} />
+            <SearchOptions icon="my_location" onClick={setGeolocation} />
         </div>
     );
 }

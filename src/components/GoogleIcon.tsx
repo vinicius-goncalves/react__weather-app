@@ -1,10 +1,6 @@
-function GoogleIcon({
-    icon,
-    className,
-}: {
-    icon: string;
-    className?: string;
-}): JSX.Element {
+import GoogleIconProps from '../types/Props/GoogleIconProps';
+
+function GoogleIcon({ icon, className }: GoogleIconProps): JSX.Element {
     return (
         <span className={`material-symbols-outlined text-white ${className}`}>
             {icon}

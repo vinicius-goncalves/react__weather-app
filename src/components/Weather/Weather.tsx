@@ -1,8 +1,8 @@
 import { useAppSelector } from '../../hooks/useAppSelector';
-import WeatherPageSkeleton from '../Skeletons/WeatherPageSkeleton';
-import WeatherCard from './WeatherCard/WeatherCard';
-import WeatherParticleInfo from './WeatherParticleInfo.tsx/WeatherInfo';
-import WeatherHourForecast from './WeatherHourForecast/WeatherHourForecast';
+import WeatherPageSkeleton from '../Skeletons/Weather/WeatherPageSkeleton';
+import WeatherParticleInfo from './WeatherInfo';
+import WeatherCard from './WeatherParticles/WeatherCard/WeatherCard';
+import WeatherHourForecast from './WeatherParticles/WeatherHourlyForecast/WeatherHourForecast';
 
 function Weather(): JSX.Element {
     const { weather, status } = useAppSelector(
@@ -16,11 +16,7 @@ function Weather(): JSX.Element {
     return (
         <div className="flex flex-col gap-2.5">
             <div className="text-white text-4xl flex gap-2.5 max-md:flex-col">
-                <WeatherCard
-                    cityName={weather.city.name}
-                    country={weather.city.country}
-                    degrees={weather.weather.temp_c}
-                />
+                <WeatherCard weather={weather} />
                 <div className="w-full flex gap-2.5">
                     <div className="flex flex-col gap-2.5 w-full">
                         <WeatherParticleInfo
@@ -68,7 +64,6 @@ function Weather(): JSX.Element {
                         code_condition={dailyForecast.condition.code}
                     />
                 ))}
-                {/* {() => console.log(weather)} */}
             </aside>
         </div>
     );

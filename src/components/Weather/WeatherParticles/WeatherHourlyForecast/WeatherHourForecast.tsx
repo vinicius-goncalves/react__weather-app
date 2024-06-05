@@ -1,9 +1,8 @@
-import { useAppSelector } from '../../../hooks/useAppSelector';
-import getWeatherIconByCode from '../../../utils/getWeatherIconByCode';
-import GoogleIcon from '../../GoogleIcon';
-import './weather-hour-forecast.css';
-
 // .weather-hour-forecast-wrapper {
+
+import { useAppSelector } from '../../../../hooks/useAppSelector';
+import getWeatherIconByCode from '../../../../utils/getWeatherIconByCode';
+import GoogleIcon from '../../../GoogleIcon';
 
 //     /* padding: 1rem 16rem 0 .56rem; */
 //     display: flex;

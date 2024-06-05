@@ -1,11 +1,13 @@
+import './index.css';
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App.tsx';
-import './index.css';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import WeatherPage from './pages/WeatherPage.tsx';
-import SettingsPage from './pages/SettingsPage.tsx';
+
 import { Provider } from 'react-redux';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+
+import App from './App.tsx';
+import WeatherPage from './pages/WeatherPage.tsx';
 import store from './store/index.ts';
 
 const root = ReactDOM.createRoot(
@@ -16,10 +18,7 @@ const router = createBrowserRouter([
     {
         path: '/',
         element: <App />,
-        children: [
-            { path: 'weather', element: <WeatherPage />, index: true },
-            { path: 'settings', element: <SettingsPage /> },
-        ],
+        children: [{ path: 'weather', element: <WeatherPage />, index: true }],
     },
 ]);
 
