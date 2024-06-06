@@ -1,4 +1,4 @@
-interface IWRForecastHour {
+interface IWRHourlyForecast {
     temp_c: number;
     condition: {
         code: number;
@@ -7,6 +7,7 @@ interface IWRForecastHour {
     time_epoch: number;
     time: string;
     chance_of_rain: number;
+    is_day: number;
 }
 
-export default IWRForecastHour;
+export default IWRHourlyForecast;

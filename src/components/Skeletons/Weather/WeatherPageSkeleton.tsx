@@ -1,5 +1,5 @@
 import WeatherCardSkeleton from './WeatherCardSkeleton';
-import WeatherHourlyForecastSkeleton from '../../Weather/WeatherParticles/WeatherInfos/WeatherHourlyForecastSkeleton';
+import WeatherHourlyForecastSkeleton from './WeatherHourlyForecastSkeleton';
 import WeatherInfoSkeleton from './WeatherInfoSkeleton';
 
 function WeatherPageSkeleton(): JSX.Element {

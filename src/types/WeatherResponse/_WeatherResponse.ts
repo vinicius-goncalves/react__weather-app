@@ -2,7 +2,7 @@ import IWRCurrent from './IWRCurrent';
 import IWRDay from './IWRDay';
 import IWRForecast from './IWRForecast';
 import IWRForecastAstro from './IWRForecastAstro';
-import IWRForecastHour from './IWRForecastHour';
+import IWRHourlyForecast from './IWRForecastHour';
 import IWRLocation from './IWRLocation';
 
 export type {
@@ -10,6 +10,6 @@ export type {
     IWRDay,
     IWRForecast,
     IWRForecastAstro,
-    IWRForecastHour,
+    IWRHourlyForecast as IWRForecastHour,
     IWRLocation,
 };

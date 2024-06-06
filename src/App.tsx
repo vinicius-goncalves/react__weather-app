@@ -1,8 +1,11 @@
 import { Outlet } from 'react-router-dom';
-import './App.css';
 
 function App(): JSX.Element {
-    return <Outlet />;
+    return (
+        <div className="bg-color1 bg-no-repeat min-w-full min-h-screen p-3">
+            <Outlet />
+        </div>
+    );
 }
 
 export default App;

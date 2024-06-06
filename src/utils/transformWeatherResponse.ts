@@ -1,5 +1,5 @@
 import IWeather from '../types/Weather/IWeather';
-import IWRForecastHour from '../types/WeatherResponse/IWRForecastHour';
+import IWRHourlyForecast from '../types/WeatherResponse/IWRForecastHour';
 import IWeatherResponse from '../types/WeatherResponse/IWeatherResponse';
 
 function transformToDate(target: string | number): Date {
@@ -16,10 +16,10 @@ function transformToDate(target: string | number): Date {
 }
 
 function getHourlyForecast(
-    todayForecast: IWRForecastHour[],
-    tomorrowForecast: IWRForecastHour[],
+    todayForecast: IWRHourlyForecast[],
+    tomorrowForecast: IWRHourlyForecast[],
     lastTimeUpdated: number
-): IWRForecastHour[] {
+): IWRHourlyForecast[] {
     const dailyForecasts = [...todayForecast, ...tomorrowForecast];
     const hourlyForecast = [];
 

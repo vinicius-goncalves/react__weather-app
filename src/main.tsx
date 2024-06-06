@@ -9,6 +9,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import App from './App.tsx';
 import WeatherPage from './pages/WeatherPage.tsx';
 import store from './store/index.ts';
+import HomePage from './pages/HomePage.tsx';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -18,7 +19,10 @@ const router = createBrowserRouter([
     {
         path: '/',
         element: <App />,
-        children: [{ path: 'weather', element: <WeatherPage />, index: true }],
+        children: [
+            { element: <HomePage />, index: true },
+            { path: 'weather', element: <WeatherPage /> },
+        ],
     },
 ]);
 

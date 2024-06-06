@@ -13,7 +13,7 @@
 
 import IWRCurrent from '../WeatherResponse/IWRCurrent';
 import IWRForecastAstro from '../WeatherResponse/IWRForecastAstro';
-import IWRForecastHour from '../WeatherResponse/IWRForecastHour';
+import IWRHourlyForecast from '../WeatherResponse/IWRForecastHour';
 import IWRLocation from '../WeatherResponse/IWRLocation';
 
 // }
@@ -21,7 +21,7 @@ interface IWeather {
     city: IWRLocation;
     astro_time: IWRForecastAstro;
     weather: IWRCurrent;
-    forecast: IWRForecastHour[];
+    forecast: IWRHourlyForecast[];
 }
 
 export default IWeather;

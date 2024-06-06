@@ -1,8 +1,8 @@
 import { useAppSelector } from '../../hooks/useAppSelector';
 import WeatherPageSkeleton from '../Skeletons/Weather/WeatherPageSkeleton';
-import WeatherParticleInfo from './WeatherInfo';
 import WeatherCard from './WeatherParticles/WeatherCard/WeatherCard';
-import WeatherHourForecast from './WeatherParticles/WeatherHourlyForecast/WeatherHourForecast';
+import WeatherHourlyForecast from './WeatherParticles/WeatherInfos/WeatherHourlyForecast';
+import WeatherParticleInfo from './WeatherParticles/WeatherInfos/WeatherInfo';
 
 function Weather(): JSX.Element {
     const { weather, status } = useAppSelector(
@@ -55,15 +55,7 @@ function Weather(): JSX.Element {
                 </div>
             </div>
             <aside className="grid grid-cols-6 gap-2.5 max-md:grid-cols-3">
-                {weather.forecast.map((dailyForecast, index) => (
-                    <WeatherHourForecast
-                        key={index}
-                        degrees={Math.round(dailyForecast.temp_c)}
-                        hour={dailyForecast.time}
-                        text_condition={dailyForecast.condition.text}
-                        code_condition={dailyForecast.condition.code}
-                    />
-                ))}
+                <WeatherHourlyForecast weather={weather} />
             </aside>
         </div>
     );

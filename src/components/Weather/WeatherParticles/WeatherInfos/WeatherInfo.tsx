@@ -1,6 +1,6 @@
-import GoogleIcon from '../GoogleIcon';
+import GoogleIcon from '../../../GoogleIcon';
 
-function WeatherParticleInfo({
+function WeatherInfo({
     icon,
     title,
     info,
@@ -20,4 +20,4 @@ function WeatherParticleInfo({
     );
 }
 
-export default WeatherParticleInfo;
+export default WeatherInfo;

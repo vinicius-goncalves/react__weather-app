@@ -12,7 +12,7 @@ function WeatherPage(): JSX.Element {
 
     return (
         <div>
-            <header className="w-full">
+            <header className="w-full flex justify-center">
                 <SearchBar />
             </header>
             <main className="mt-2.5">
