@@ -18,7 +18,7 @@ interface WHFItemProps {
 const twClasses = tv({
     slots: {
         wrapper:
-            'flex flex-col items-center justify-between w-full bg-color0 p-4 hover:opacity-95 hover:cursor-pointer hover:scale-[1.02]',
+            'flex w-full flex-col items-center justify-between bg-color0 p-4 hover:scale-[1.02] hover:cursor-pointer hover:opacity-95',
     },
 })();
 
@@ -32,14 +32,15 @@ function WeatherHourlyForecastItem({ forecast }: WHFItemProps) {
 
     const { text: textCondition, code: codeCondition } = forecast.condition;
 
+    console.log(textCondition, codeCondition);
     return (
         <div key={timeEpoch} className={wrapper()}>
             <div className="text-center">
                 <p className="text-white">{time}</p>
                 <small className="text-color3">{textCondition}</small>
             </div>
-            <div className="text-center m-3">
-                <GoogleIcon icon={getWeatherIconByCode(codeCondition, isDay)} className="text-color3 text-5xl" />
+            <div className="m-3 text-center">
+                <GoogleIcon icon={getWeatherIconByCode(codeCondition, isDay)} className="text-5xl text-color3" />
                 <p className="text-color3">{degrees}°</p>
             </div>
         </div>
