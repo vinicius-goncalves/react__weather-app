@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import useLocalStorage from './useLocalStorage';
 
 interface IGeolocation {
@@ -16,7 +17,7 @@ interface IGeolocationOptions {
 function useGeolocation({ watchPosition = true }: IGeolocationOptions = {}): IGeolocation {
     const [askedPermission, setAskedPermission] = useLocalStorage('asked_geolocation_permission', false);
     const watchId = useRef<number | null>(null);
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const [geolocation, setGeolocation] = useState<IGeolocation | null>({
         isFetching: true,
@@ -30,7 +31,7 @@ function useGeolocation({ watchPosition = true }: IGeolocationOptions = {}): IGe
 
             permissionStatus.addEventListener('change', () => {
                 setAskedPermission(true);
-                window.location.reload();
+                navigate(0);
             });
         };
 
