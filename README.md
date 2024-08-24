@@ -1,4 +1,3 @@
-
 # 🌧 Weather App
 A small but complete a weather application to show how it can be build using frameworks and libraries such as React, React Redux and Tailwind.
 
@@ -19,14 +18,33 @@ A small but complete a weather application to show how it can be build using fra
 
 <div>
 
-  ## Tecnologies used
-  Those are the main tools I used to build this project.
+  ## Technologies used
+  Those are the main technologies I used to build this project.
   
   |  💻 languages  |  📚 libraries & frameworks |
   | :-------------: | :-----------------------:  |
   | ![][typescript] | ![][tailwind]              | 
   | **-**           | ![][react]                 |
   | **-**           | ![][redux]                 |
+  
+</div>
+
+<div>
+
+  ## How to install locally
+  If you want to test the project local for any reason, first of all clone this repo:
+
+  ```
+  git clone https://github.com/vinicius-goncalves/react__weather-app
+  ```
+
+  After cloning, go to the root project folder and then install the required packages using your package manager.
+
+  ```
+  npm install
+  ```
+
+  Since this project uses [Vite][vite-path], you can use `npm run dev` when developing or `npm run build` for deployment purposes.
   
 </div>
 
@@ -52,6 +70,7 @@ A small but complete a weather application to show how it can be build using fra
 [geolocation-api]: <https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API> "Geolocation API"
 [weather-api]: <https://www.weatherapi.com/> "Weather API"
 [try-it-out-path]: <https://weather.vinicius-goncalves.com> "Weather App"
+[vite-path]: <https://vitejs.dev/> "Vite"
 
 [comment]: # (reference-links)
 
