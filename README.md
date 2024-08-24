@@ -51,7 +51,7 @@ A small but complete a weather application to show how it can be build using fra
 
 [geolocation-api]: <https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API> "Geolocation API"
 [weather-api]: <https://www.weatherapi.com/> "Weather API"
-[try-it-out-path]: <weather.vinicius-goncalves.com> "Weather App"
+[try-it-out-path]: <https://weather.vinicius-goncalves.com> "Weather App"
 
 [comment]: # (reference-links)
 
