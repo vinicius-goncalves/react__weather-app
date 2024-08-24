@@ -14,9 +14,7 @@ function useLocalStorage<T>(key: string, initialValue: T) {
     const setValue = useCallback(
         (value: T | ((target: T) => T)) => {
             try {
-                const v =
-                    value instanceof Function ? value(storedValue) : value;
-
+                const v = value instanceof Function ? value(storedValue) : value;
                 setStoredValue(v);
                 localStorage.setItem(key, JSON.stringify(v));
             } catch (err) {
@@ -24,7 +22,7 @@ function useLocalStorage<T>(key: string, initialValue: T) {
             }
         },
 
-        [storedValue, key]
+        [storedValue, key],
     );
 
     return [storedValue, setValue] as const;

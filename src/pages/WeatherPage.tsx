@@ -6,20 +6,20 @@ import useGeolocation from '../hooks/useGeolocation';
 
 const weatherPage = tv({
     slots: {
-        wrapper: 'bg-color1 bg-no-repeat min-w-full min-h-screen p-3',
-        header: 'w-full flex justify-center',
+        wrapper: 'min-h-screen min-w-full bg-color1 bg-no-repeat p-3',
+        header: 'flex w-full justify-center',
         main: 'mt-2.5',
-        footer: 'text-color3 m-3 text-center',
-        anchor: 'text-white hover:opacity-60 transition-opacity duration-200',
+        footer: 'm-3 text-center text-color3',
+        anchor: 'text-white transition-opacity duration-200 hover:opacity-60',
     },
 })();
 
 const { wrapper, header, main, footer, anchor } = weatherPage;
 
 function WeatherPage(): JSX.Element {
-    const { requestBefore } = useGeolocation();
+    const { askedPermission } = useGeolocation({ watchPosition: false });
 
-    if (!requestBefore) {
+    if (!askedPermission) {
         return <GeolocationPermissionRequest />;
     }
 

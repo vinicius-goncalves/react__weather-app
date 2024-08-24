@@ -8,9 +8,9 @@ import WeatherParticleInfo from './WeatherParticles/WeatherInfos/WeatherInfo';
 const twClasses = tv({
     slots: {
         wrapper: 'flex flex-col gap-2.5',
-        content: 'text-white text-4xl flex gap-2.5 max-md:flex-col',
-        flexWrapper: 'w-full flex gap-2.5',
-        flexColumns: 'flex flex-col gap-2.5 w-full',
+        content: 'flex gap-2.5 text-4xl text-white max-md:flex-col',
+        flexWrapper: 'flex w-full gap-2.5',
+        flexColumns: 'flex w-full flex-col gap-2.5',
         asideContent: 'grid grid-cols-6 gap-2.5 max-md:grid-cols-3',
     },
 })();
@@ -36,7 +36,7 @@ function Weather(): JSX.Element {
                         <WeatherParticleInfo icon="partly_cloudy_day" title="Cloud cover" info={`${w.cloud}%`} />
                         <WeatherParticleInfo icon="air" title="Wind K/m" info={`${w.wind_kph} K/m`} />
                     </div>
-                    <div className="flex flex-col gap-2.5 w-full">
+                    <div className="flex w-full flex-col gap-2.5">
                         <WeatherParticleInfo icon="wb_twilight" title="Sunset" info={astro_time.sunset} />
                         <WeatherParticleInfo
                             icon="dark_mode"
