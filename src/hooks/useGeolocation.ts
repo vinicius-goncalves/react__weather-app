@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useLocalStorage from './useLocalStorage';
 
@@ -10,13 +10,8 @@ interface IGeolocation {
     longitude?: number;
 }
 
-interface IGeolocationOptions {
-    watchPosition?: boolean;
-}
-
-function useGeolocation({ watchPosition = true }: IGeolocationOptions = {}): IGeolocation {
+function useGeolocation(): IGeolocation {
     const [askedPermission, setAskedPermission] = useLocalStorage('asked_geolocation_permission', false);
-    const watchId = useRef<number | null>(null);
     const navigate = useNavigate();
 
     const [geolocation, setGeolocation] = useState<IGeolocation | null>({
@@ -25,18 +20,24 @@ function useGeolocation({ watchPosition = true }: IGeolocationOptions = {}): IGe
 
     useEffect(() => {
         const handleWithGeolocationPermission = async () => {
-            const permissions = navigator.permissions;
-            const permissionStatus = await permissions.query({ name: 'geolocation' });
-            if (permissionStatus.state !== 'prompt') setAskedPermission(true);
+            try {
+                const { permissions } = navigator;
+                const permissionStatus = await permissions.query({ name: 'geolocation' });
+                if (permissionStatus.state !== 'prompt') setAskedPermission(true);
 
-            permissionStatus.addEventListener('change', () => {
-                setAskedPermission(true);
-                navigate(0);
-            });
+                const handlePermissionChange = () => {
+                    setAskedPermission(true);
+                    navigate(0);
+                };
+
+                permissionStatus.onchange = handlePermissionChange;
+            } catch (err) {
+                console.warn(err);
+            }
         };
 
         handleWithGeolocationPermission();
-    }, [setAskedPermission]);
+    }, [setAskedPermission, navigate]);
 
     useEffect(() => {
         const onSuccess = (gp: GeolocationPosition) => {
@@ -63,17 +64,12 @@ function useGeolocation({ watchPosition = true }: IGeolocationOptions = {}): IGe
             timeout: 60 * 1000,
         };
 
-        if (watchPosition) {
-            const id = navigator.geolocation.watchPosition(onSuccess, onError, positionOptions);
-            watchId.current = id;
-        } else {
-            navigator.geolocation.getCurrentPosition(onSuccess, onError, positionOptions);
-        }
+        const id = navigator.geolocation.watchPosition(onSuccess, onError, positionOptions);
 
         return () => {
-            if (watchId.current) navigator.geolocation.clearWatch(watchId.current);
+            navigator.geolocation.clearWatch(id);
         };
-    }, [askedPermission, watchPosition]);
+    }, [askedPermission]);
 
     return geolocation as IGeolocation;
 }
