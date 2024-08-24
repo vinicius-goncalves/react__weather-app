@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import debounce from '../utils/debounce';
+import { debounce } from '../utils';
 
 function useInputQuery(delayMs: number = 1000, initialQuery: string = '') {
     const [query, setQuery] = useState<string>(initialQuery);

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-this-alias */
-export default function debounce<T extends (...args: any[]) => any>(
+export function debounce<T extends (...args: any[]) => any>(
     func: T,
     wait: number = 1000,
     immediate: boolean = false

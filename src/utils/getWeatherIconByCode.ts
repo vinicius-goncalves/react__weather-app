@@ -14,8 +14,6 @@ function getIcon(code: number, isDay: boolean): string {
     return (isDay ? dayIcons : nightIcons)[code] as string;
 }
 
-function getWeatherIconByCode(code: number, isDay: boolean): string {
+export function getWeatherIconByCode(code: number, isDay: boolean): string {
     return getIcon(code, isDay);
 }
-
-export default getWeatherIconByCode;

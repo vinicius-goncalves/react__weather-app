@@ -1,21 +1,28 @@
-import { Fragment, type MouseEvent } from 'react';
-// import './search-options.css';
+import { type MouseEvent } from 'react';
+import { tv } from 'tailwind-variants';
+import GoogleIcon from '../GoogleIcon';
 
-type TSearchOptions = {
+interface Props {
     icon: string;
     onClick?: (event: MouseEvent) => void;
-};
+}
 
-function SearchOptions({ icon, onClick }: TSearchOptions): JSX.Element {
+const twClasses = tv({
+    slots: {
+        wrapper:
+            'background-transparent border-none text-white/90 transition-opacity duration-200 flex justify-center items-center hover:opacity-75 hover:cursor-pointer',
+    },
+})();
+
+const { wrapper } = twClasses;
+
+function SearchOptions({ icon, onClick }: Props): JSX.Element {
     return (
-        <Fragment>
-            <button
-                className="background-transparent border-none text-white/90 transition-opacity duration-200 flex justify-center items-center hover:opacity-75 hover:cursor-pointer"
-                type="button"
-                onClick={onClick}>
-                <span className="material-symbols-outlined">{icon}</span>
+        <>
+            <button className={wrapper()} type="button" onClick={onClick}>
+                <GoogleIcon icon={icon} />
             </button>
-        </Fragment>
+        </>
     );
 }
 

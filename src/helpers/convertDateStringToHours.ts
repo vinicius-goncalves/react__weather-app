@@ -1,4 +1,4 @@
-function convertDateStringToHours(dateStr: string): string {
+export function convertDateStringToHours(dateStr: string): string {
     const d = new Date(dateStr);
     const h = d.getHours();
 
@@ -6,5 +6,3 @@ function convertDateStringToHours(dateStr: string): string {
 
     return `${fHours}:00`;
 }
-
-export default convertDateStringToHours;

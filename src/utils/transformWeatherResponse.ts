@@ -39,7 +39,7 @@ function getHourlyForecast(
     return hourlyForecast;
 }
 
-function transformWeatherResponse(weatherResponse: IWeatherResponse): IWeather {
+export function transformWeatherResponse(weatherResponse: IWeatherResponse): IWeather {
     if (!weatherResponse) {
         throw new Error('Weather response cannot be undefined.');
     }
@@ -50,8 +50,7 @@ function transformWeatherResponse(weatherResponse: IWeatherResponse): IWeather {
         location,
     } = weatherResponse;
 
-    const { cloud, wind_kph, last_updated, condition, temp_c, is_day } =
-        currentForecast;
+    const { cloud, wind_kph, last_updated, condition, temp_c, is_day } = currentForecast;
 
     const todayForecast = dailyForecast[0];
     const tomorrowForecast = dailyForecast[1];
@@ -62,11 +61,7 @@ function transformWeatherResponse(weatherResponse: IWeatherResponse): IWeather {
     const { name, country, localtime: local_time } = location;
     const { sunset, sunrise } = astro;
 
-    const currentHourlyForecast = getHourlyForecast(
-        todayHourlyForecast,
-        tomorrowHourlyForecast,
-        last_updated
-    );
+    const currentHourlyForecast = getHourlyForecast(todayHourlyForecast, tomorrowHourlyForecast, last_updated);
 
     return {
         astro_time: { sunrise, sunset, is_day: is_day == 1 },
@@ -75,5 +70,3 @@ function transformWeatherResponse(weatherResponse: IWeatherResponse): IWeather {
         forecast: currentHourlyForecast,
     };
 }
-
-export default transformWeatherResponse;

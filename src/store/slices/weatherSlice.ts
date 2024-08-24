@@ -1,5 +1,3 @@
-// import { createReducer, createSlice } from '@reduxjs/toolkit';
-
 import { createSlice } from '@reduxjs/toolkit';
 import IWeather from '../../types/Weather/IWeather';
 

@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import IWeather from '../../types/Weather/IWeather';
 import IWeatherResponse from '../../types/WeatherResponse/IWeatherResponse';
-import transformWeatherResponse from '../../utils/transformWeatherResponse';
+import { transformWeatherResponse } from '../../utils';
 
 const WEATHER_API_KEY = import.meta.env.VITE_WEATHER_API_KEY as string;
 
@@ -27,5 +27,5 @@ const weatherApi = createApi({
 });
 
 export const { useGetCityWeatherQuery } = weatherApi;
-weatherApi.endpoints.getCityWeather.useQuery;
+
 export default weatherApi;

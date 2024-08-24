@@ -1,20 +1,30 @@
+import { tv } from 'tailwind-variants';
 import GoogleIcon from '../../../GoogleIcon';
 
-function WeatherInfo({
-    icon,
-    title,
-    info,
-}: {
+interface Props {
     icon: string;
     title: string;
     info: unknown;
-}): JSX.Element {
+}
+
+const weatherInfo = tv({
+    slots: {
+        wrapper: 'bg-color0 h-[inherit] flex items-center flex-auto gap-4 p-2.5 w-full',
+        googleIcon: 'text-[3rem]',
+        title: 'text-white text-base',
+        description: 'text-color3 text-base',
+    },
+})();
+
+const { wrapper, googleIcon, title: twTitle, description } = weatherInfo;
+
+function WeatherInfo({ icon, title, info }: Props): JSX.Element {
     return (
-        <div className="bg-color0 h-[inherit] flex items-center flex-auto gap-4 p-2.5 w-full">
-            <GoogleIcon icon={icon} className="text-[3rem]" />
+        <div className={wrapper()}>
+            <GoogleIcon icon={icon} className={googleIcon()} />
             <div>
-                <p className="text-white text-base">{title}</p>
-                <p className="text-color3 text-base">{String(info)}</p>
+                <p className={twTitle()}>{title}</p>
+                <p className={description()}>{String(info)}</p>
             </div>
         </div>
     );
