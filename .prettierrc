@@ -4,5 +4,7 @@
     "bracketSameLine": true,
     "arrowParens": "always",
     "semi": true,
-    "printWidth": 115
+    "printWidth": 115,
+    "plugins": ["prettier-plugin-tailwindcss"],
+    "tailwindConfig": "./styles/tailwind.config.js"
 }
