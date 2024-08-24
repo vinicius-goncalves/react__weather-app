@@ -32,6 +32,10 @@ function Search(): JSX.Element {
         if (!geolocation.isFetching && !geolocation.error) {
             updateQuery(`${geolocation.latitude},${geolocation.longitude}`);
         }
+
+        if (geolocation.error) {
+            updateQuery('London');
+        }
     }, [geolocation, updateQuery]);
 
     useEffect(() => {
@@ -65,7 +69,7 @@ function Search(): JSX.Element {
                     ref={inputQuery}
                 />
             </div>
-            <SearchOptions icon="my_location" onClick={setGeolocation} />
+            {!geolocation.error && <SearchOptions icon="my_location" onClick={setGeolocation} />}
         </div>
     );
 }
