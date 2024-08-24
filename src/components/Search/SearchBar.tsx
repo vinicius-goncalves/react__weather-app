@@ -11,9 +11,9 @@ import SearchOptions from './SearchOptions';
 const searchBar = tv({
     slots: {
         wrapper:
-            'flex justify-center items-center w-full max-w-xl border border-color3 p-4 color-white bg-color0 focus-within:border-white',
-        content: 'flex items-center w-full',
-        input: 'ml-2 border-none outline-none bg-transparent text-sm overflow-hidden placeholder:opacity-60 text-white w-full',
+            'color-white flex w-full max-w-xl items-center justify-center border border-color3 bg-color0 p-4 focus-within:border-white',
+        content: 'flex w-full items-center',
+        input: 'ml-2 w-full overflow-hidden border-none bg-transparent text-sm text-white outline-none placeholder:opacity-60',
     },
 })();
 
@@ -23,13 +23,10 @@ function Search(): JSX.Element {
     const { query, updateQuery } = useInputQuery(1100);
 
     const dispatch = useAppDispatch();
-    const geolocation = useGeolocation();
+    const geolocation = useGeolocation({ watchPosition: false });
     const inputQuery = useRef<HTMLInputElement | null>(null);
 
-    const { data: weather, ...weatherApi } = useGetCityWeatherQuery(
-        { q: query },
-        { skip: !query, refetchOnFocus: true, refetchOnReconnect: true }
-    );
+    const { data: weather, ...weatherApi } = useGetCityWeatherQuery({ q: query }, { skip: !query });
 
     useEffect(() => {
         if (!geolocation.isFetching && !geolocation.error) {
@@ -44,7 +41,7 @@ function Search(): JSX.Element {
                 isLoading: weatherApi.isLoading,
                 isFetching: weatherApi.isFetching,
                 isUninitialized: weatherApi.isUninitialized,
-            })
+            }),
         );
     }, [weather, weatherApi, dispatch]);
 
@@ -64,7 +61,7 @@ function Search(): JSX.Element {
                     className={input()}
                     type="text"
                     placeholder="Ratabaná, BR"
-                    onInput={updateQuery}
+                    onInput={(ev) => updateQuery((ev.target as HTMLInputElement).value)}
                     ref={inputQuery}
                 />
             </div>

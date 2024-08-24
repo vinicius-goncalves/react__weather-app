@@ -1,21 +1,15 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { debounce } from '../utils';
 
 function useInputQuery(delayMs: number = 1000, initialQuery: string = '') {
     const [query, setQuery] = useState<string>(initialQuery);
 
-    const eventFunc = (input: React.FormEvent<HTMLInputElement> | string) => {
-        if (typeof input === 'string') {
-            setQuery(input);
-            return;
-        }
+    const debouncedInput = useMemo(() => {
+        const debouncedFn = debounce((value: string) => setQuery(value), delayMs);
+        return debouncedFn;
+    }, [delayMs]);
 
-        setQuery((input.target as HTMLInputElement).value);
-    };
-
-    const debouncedInput = debounce(eventFunc, delayMs);
-    const updateQuery = useCallback(debouncedInput, [debouncedInput, delayMs]);
-
+    const updateQuery = useCallback(debouncedInput, [debouncedInput]);
     return { query, updateQuery };
 }
 export default useInputQuery;

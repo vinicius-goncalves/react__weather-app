@@ -3,11 +3,12 @@ import GoogleIcon from '../GoogleIcon';
 
 const twClasses = tv({
     slots: {
-        wrapper: 'min-w-full min-h-screen flex items-center justify-center flex-col text-center',
+        wrapper:
+            'flex min-h-screen min-w-full flex-col items-center justify-center bg-color1 bg-no-repeat p-3 text-center',
         googleIcon: 'text-8xl',
-        title: 'text-white text-2xl font-bold',
+        title: 'text-2xl font-bold text-white',
         description: 'text-gray-500',
-        smallDescription: 'text-gray-300/10 m-4',
+        smallDescription: 'm-4 text-gray-300/10',
     },
 })();
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useLocalStorage from './useLocalStorage';
 
 interface IGeolocation {
@@ -9,11 +9,13 @@ interface IGeolocation {
     longitude?: number;
 }
 
-function useGeolocation(): IGeolocation {
-    const [requestBefore, setGeolocationRequestedBefore] = useLocalStorage(
-        'geolocation_requested_before',
-        false
-    );
+interface IGeolocationOptions {
+    watchPosition?: boolean;
+}
+
+function useGeolocation({ watchPosition = true }: IGeolocationOptions = {}): IGeolocation {
+    const [requestBefore, setGeolocationRequestedBefore] = useLocalStorage('geolocation_requested_before', false);
+    const watchId = useRef<number>(-1);
 
     const [geolocation, setGeolocation] = useState<IGeolocation | null>({
         isFetching: true,
@@ -39,16 +41,24 @@ function useGeolocation(): IGeolocation {
             }));
         };
 
-        const id = navigator.geolocation.watchPosition(onSuccess, onError, {
+        const positionOptions: PositionOptions = {
             enableHighAccuracy: false,
             timeout: 60 * 1000,
-        });
+        };
+
+        if (watchPosition) {
+            const id = navigator.geolocation.watchPosition(onSuccess, onError, positionOptions);
+            watchId.current = id;
+            return;
+        }
+
+        navigator.geolocation.getCurrentPosition(onSuccess, onError, positionOptions);
 
         return () => {
-            navigator.geolocation.clearWatch(id);
+            navigator.geolocation.clearWatch(watchId.current);
             setGeolocationRequestedBefore(true);
         };
-    }, [requestBefore, setGeolocationRequestedBefore]);
+    }, [requestBefore, setGeolocationRequestedBefore, watchPosition]);
 
     return geolocation as IGeolocation;
 }
