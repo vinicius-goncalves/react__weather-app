@@ -6,11 +6,11 @@ const commonIcons = {
     1183: 'rainy',
 };
 
-function createWeatherIcons(weatherIconsMap: TWeatherIconMap, defaultIcons?: TWeatherIconMap) {
+function createWeatherIconsMap(weatherIconsMap: TWeatherIconMap, defaultIcons?: TWeatherIconMap) {
     return { ...weatherIconsMap, ...defaultIcons };
 }
 
-const nightIcons: TWeatherIconMap = createWeatherIcons(
+const nightIcons: TWeatherIconMap = createWeatherIconsMap(
     {
         1000: 'clear_night',
         1003: 'partly_cloudy_night',
@@ -18,7 +18,7 @@ const nightIcons: TWeatherIconMap = createWeatherIcons(
     commonIcons,
 );
 
-const dayIcons: TWeatherIconMap = createWeatherIcons(
+const dayIcons: TWeatherIconMap = createWeatherIconsMap(
     {
         1000: 'clear_day',
         1003: 'partly_cloudy_day',
