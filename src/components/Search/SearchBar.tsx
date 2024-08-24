@@ -23,7 +23,7 @@ function Search(): JSX.Element {
     const { query, updateQuery } = useInputQuery(1100);
 
     const dispatch = useAppDispatch();
-    const geolocation = useGeolocation({ watchPosition: false });
+    const geolocation = useGeolocation();
     const inputQuery = useRef<HTMLInputElement | null>(null);
 
     const { data: weather, ...weatherApi } = useGetCityWeatherQuery({ q: query }, { skip: !query });

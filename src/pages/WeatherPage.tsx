@@ -17,7 +17,7 @@ const weatherPage = tv({
 const { wrapper, header, main, footer, anchor } = weatherPage;
 
 function WeatherPage(): JSX.Element {
-    const { askedPermission } = useGeolocation({ watchPosition: false });
+    const { askedPermission } = useGeolocation();
 
     if (!askedPermission) {
         return <GeolocationPermissionRequest />;
