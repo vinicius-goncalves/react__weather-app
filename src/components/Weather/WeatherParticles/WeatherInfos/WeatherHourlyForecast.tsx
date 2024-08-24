@@ -32,7 +32,6 @@ function WeatherHourlyForecastItem({ forecast }: WHFItemProps) {
 
     const { text: textCondition, code: codeCondition } = forecast.condition;
 
-    console.log(textCondition, codeCondition);
     return (
         <div key={timeEpoch} className={wrapper()}>
             <div className="text-center">
